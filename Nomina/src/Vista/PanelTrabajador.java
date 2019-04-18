@@ -7,7 +7,7 @@ package Vista;
 
 import Control.PanelTrabajadorControl;
 import Control.TrabajadorControl;
-import static Vista.Principal.Escritorio;
+import static Vista.PrincipalTrabajador.Escritorio;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 
