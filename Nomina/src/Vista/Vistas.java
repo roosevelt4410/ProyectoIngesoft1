@@ -10,15 +10,16 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author Alexandra
+ * @author jonie
  */
 public class Vistas {
-     public JInternalFrame returnInternal(JPanel panel,String text){
+    
+       public JInternalFrame returnInternal(JPanel panel,String text){
         JInternalFrame interno=new JInternalFrame(text);
         interno.add(panel);
         interno.setClosable(true);
         interno.pack();
         interno.setVisible(true);
         return interno;
-    }  
+    } 
 }
