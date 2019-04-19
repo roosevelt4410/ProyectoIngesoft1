@@ -7,26 +7,28 @@ import java.util.Vector;
 
 
 public class UsuarioControl {
+    int idUsuario;
     String usuario;
     String contrasena;
-    Vector<String> roles;
+    ArrayList rolesEscogidos = new ArrayList(4);
     String cedulaTrabajador;
 
-    public UsuarioControl(String usuario, String contrasena,Vector<String> roles , String cedulaTrabajador) {
+    public UsuarioControl(int idUsuario,String usuario, String contrasena,ArrayList rolesEscogidos , String cedulaTrabajador) {
+        this.idUsuario=idUsuario;
         this.usuario = usuario;
         this.contrasena = contrasena;
         this.cedulaTrabajador=cedulaTrabajador;
-        this.roles=roles;
+        this.rolesEscogidos=rolesEscogidos;
         
     }
       
-    public Logica devolverUsuario(){
-        Logica logicaa = new Logica(usuario, contrasena,roles,cedulaTrabajador);
+    public UsuarioLogica devolverUsuario(){
+        UsuarioLogica logicaa = new UsuarioLogica(idUsuario,usuario, contrasena,rolesEscogidos,cedulaTrabajador);
         return logicaa;
     }
   
     public boolean guardarUsuario() throws SQLException{
-            Logica guardar=new Logica(usuario,contrasena,roles,cedulaTrabajador);
+            UsuarioLogica guardar=new UsuarioLogica(idUsuario,usuario,contrasena,rolesEscogidos,cedulaTrabajador);
             return guardar.ingresarUsuariobd();
     }
 }
