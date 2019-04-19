@@ -8,6 +8,9 @@ package Vista;
 
 import Control.PanelTrabajadorControl;
 import Control.TrabajadorControl;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 
@@ -378,6 +381,8 @@ public class PanelActualizarTrabajador extends javax.swing.JPanel {
 
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(this, "No Se Puede Convertir ");
+            } catch (SQLException ex) {
+                Logger.getLogger(PanelActualizarTrabajador.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         } else {

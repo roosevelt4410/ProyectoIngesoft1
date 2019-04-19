@@ -5,9 +5,16 @@
  */
 package Vista;
 
+import Control.CargoControl;
 import Control.PanelTrabajadorControl;
 import Control.TrabajadorControl;
-import static Vista.PrincipalTrabajador.Escritorio;
+import Logica.TrabajadorLogica;
+import Modelo.TrabajadorMapeo;
+import static Vista.PanelCargoTrabajador.cod;
+import static Vista.PrincipalGestorNomina.Escritorio;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 
@@ -23,7 +30,8 @@ public class PanelTrabajador extends javax.swing.JPanel {
     public PanelTrabajador() {
         initComponents();
     }
-
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -348,20 +356,22 @@ public class PanelTrabajador extends javax.swing.JPanel {
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         // TODO add your handling code here:
-        
+
         if (!cpt.aseguramientoDatos(jtxCedula.getText(), jtxNombre.getText(), jtxApellido.getText(), jtxDireccion.getText(), jtxTelefono.getText(), jtxCelular.getText(),
                 jtxFpension.getText(), jtxFcesantias.getText(), jtxFpension.getText(), jtxArl.getText())) {
             try {
-                if (cpt.verificarTrabajador(jtxCedula.getText(), jtxNombre.getText(), jtxApellido.getText(), jCalendar1.getDate(), jtxDireccion.getText(), jtxTelefono.getText(), jtxCelular.getText(), jtxArl.getText(), jtxFpension.getText(), jtxFcesantias.getText(), "Bien", null,trabajadorC.ControlconvertirenTrueOfalse(jComboBox1.getSelectedIndex()))) {
+                if (cpt.verificarTrabajador(jtxCedula.getText(), jtxNombre.getText(), jtxApellido.getText(), jCalendar1.getDate(), jtxDireccion.getText(), jtxTelefono.getText(), jtxCelular.getText(), jtxArl.getText(), jtxFpension.getText(), jtxFcesantias.getText(), "Bien", cargoC.getCargo(cod), trabajadorC.ControlconvertirenTrueOfalse(jComboBox1.getSelectedIndex()))) {
                     JOptionPane.showMessageDialog(this, "Trabajador Ya  Existe");
                 } else {
-                    trabajadorC.crearTrabajadorC(Long.parseLong(jtxCedula.getText()), jtxNombre.getText(), jtxApellido.getText(), jCalendar1.getDate(), jtxDireccion.getText(), Integer.parseInt(jtxTelefono.getText()), Long.parseLong(jtxCelular.getText()), jtxArl.getText(), jtxFpension.getText(), jtxFcesantias.getText(), "Bien", null,trabajadorC.ControlconvertirenTrueOfalse(jComboBox1.getSelectedIndex()));
+                    trabajadorC.crearTrabajadorC(Long.parseLong(jtxCedula.getText()), jtxNombre.getText(), jtxApellido.getText(), jCalendar1.getDate(), jtxDireccion.getText(), Integer.parseInt(jtxTelefono.getText()), Long.parseLong(jtxCelular.getText()), jtxArl.getText(), jtxFpension.getText(), jtxFcesantias.getText(), "Bien", cargoC.getCargo(cod), trabajadorC.ControlconvertirenTrueOfalse(jComboBox1.getSelectedIndex()));
                     JOptionPane.showMessageDialog(this, "Trabajador Agregado Existosamente");
                     cpt.setText(jtxNombre, jtxApellido, jtxDireccion, jtxTelefono, jtxCelular, jtxArl, jtxCedula, jtxFpension, jtxFcesantias);
-                }
+                }   
 
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(this, "No Se Puede Convertir ");
+            } catch (SQLException ex) {
+                Logger.getLogger(PanelTrabajador.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         } else {
@@ -400,6 +410,8 @@ public class PanelTrabajador extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:      
+        jTable1.setModel(cargoC.listarCargosC());
+        jTable1.setVisible(true);
         JInternalFrame interno = new JInternalFrame("Asignar Cargo");
         interno.add(panelct);
         interno.setVisible(true);
@@ -408,8 +420,9 @@ public class PanelTrabajador extends javax.swing.JPanel {
         Escritorio.add(interno);
         Escritorio.revalidate();
         Escritorio.repaint();
+        Escritorio.selectFrame(true);
         
-       
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
@@ -439,7 +452,7 @@ public class PanelTrabajador extends javax.swing.JPanel {
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JTextField jtxApellido;
     private javax.swing.JTextField jtxArl;
-    private javax.swing.JTextField jtxCedula;
+    public static javax.swing.JTextField jtxCedula;
     private javax.swing.JTextField jtxCelular;
     private javax.swing.JTextField jtxDireccion;
     private javax.swing.JTextField jtxFcesantias;
@@ -450,5 +463,8 @@ public class PanelTrabajador extends javax.swing.JPanel {
 
     PanelTrabajadorControl cpt = new PanelTrabajadorControl();
     TrabajadorControl trabajadorC = new TrabajadorControl();
+    TrabajadorLogica trabajadorL =  new TrabajadorLogica();
     PanelCargoTrabajador panelct = new PanelCargoTrabajador();
+    CargoControl cargoC = new CargoControl();
+    TrabajadorMapeo trl =  new TrabajadorMapeo();
 }

@@ -6,7 +6,7 @@
 package Vista;
 
 import Vista.VistaAdministradorSistema;
-import Control.Control;
+import Control.UsuarioControl;
 import java.sql.SQLException;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -162,7 +162,7 @@ public class crearUsuario extends javax.swing.JFrame {
             //pantalla donde se manda informacion al usuario de que no escogio ningun Rol para el nuevo usuario
         }
         
-        Control controlCrearUsuario = new Control(nuevoUsuario,contrasenaNueva,rolesEscogidos,nuevaCedula);
+        UsuarioControl controlCrearUsuario = new UsuarioControl(nuevoUsuario,contrasenaNueva,rolesEscogidos,nuevaCedula);
         
         try {
             if(controlCrearUsuario.guardarUsuario()){

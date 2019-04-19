@@ -7,8 +7,12 @@ package Logica;
 
 import Modelo.Cargo;
 import static Modelo.Cargo.LISTACARGOS;
+import Modelo.CargoMapeo;
+import Modelo.Trabajador;
 import static Modelo.Trabajador.LISTATRABAJADORES;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -18,11 +22,12 @@ import javax.swing.table.DefaultTableModel;
 public class CargoLogica {
 
     public Cargo cargo = new Cargo();
+    public CargoMapeo cargoMapeo = new CargoMapeo();
 
-    public void crearCargo(String nombreCargo, int codigoCargo, String descripcionCargo, double salario) {
+    /*public void crearCargo(String nombreCargo, int codigoCargo, String descripcionCargo, double salario) {
         cargo = new Cargo(nombreCargo, codigoCargo, descripcionCargo, salario);
         LISTACARGOS.add(cargo);
-    }
+    }*/
 
     public int retornaIndice(long identificacion, ArrayList<Cargo> listaCargo) {
         int aux = 0;
@@ -85,6 +90,15 @@ public class CargoLogica {
             tablaCargo.setValueAt(cargo.getSalario(), i, 2);
         }
         return tablaCargo;
+
+    }
+    //------------------Mapeo---------------------------
+
+    public void crearCargo( String nombreCargo,int codigoCargo, String descripcion, Double salario) throws SQLException {
+
+        Cargo cargos = new Cargo(nombreCargo, codigoCargo, descripcion, salario);
+        LISTACARGOS.add(cargos);
+        cargoMapeo.insertCargo(cargos);
 
     }
 }

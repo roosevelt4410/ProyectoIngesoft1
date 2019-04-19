@@ -5,7 +5,7 @@
  */
 package Vista;
 
-import Control.Control;
+import Control.UsuarioControl;
 import java.sql.SQLException;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -88,7 +88,7 @@ public class PrincipalUsuario extends javax.swing.JFrame {
     private void AceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AceptarActionPerformed
         Vector<String> roles = null;
         String cedulaTrabajador="";
-        Control controll = new Control(usuarioo.getText(),contrasena.getText(),roles,cedulaTrabajador);
+        UsuarioControl controll = new UsuarioControl(usuarioo.getText(),contrasena.getText(),roles,cedulaTrabajador);
         try {
             if(controll.devolverUsuario().validarUsuario()){
                 this.setVisible(false);

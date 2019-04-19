@@ -8,6 +8,7 @@ package Control;
 import Logica.CargoLogica;
 import Modelo.Cargo;
 import static Modelo.Cargo.LISTACARGOS;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
@@ -19,7 +20,7 @@ public class CargoControl {
 
     CargoLogica cargoL = new CargoLogica();
 
-    public CargoControl(String nombreCargo, int codigoCargo, String descripcionCargo, double salario) {
+    public CargoControl(String nombreCargo, int codigoCargo, String descripcionCargo, double salario) throws SQLException {
         cargoL.crearCargo(nombreCargo, codigoCargo, descripcionCargo, salario);
     }
 

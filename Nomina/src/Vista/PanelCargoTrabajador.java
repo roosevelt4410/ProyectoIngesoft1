@@ -7,8 +7,11 @@ package Vista;
 
 import Control.CargoControl;
 import Control.TrabajadorControl;
+import Modelo.Trabajador;
 import static Modelo.Trabajador.LISTATRABAJADORES;
 import javax.swing.JOptionPane;
+import static Vista.PanelTrabajador.jtxCedula;
+
 
 /**
  *
@@ -19,10 +22,12 @@ public class PanelCargoTrabajador extends javax.swing.JPanel {
     /**
      * Creates new form PanelCargoTrabajador
      */
+    public static int cod;
     public PanelCargoTrabajador() {
         initComponents();
         jTable1.setModel(cargoC.listarCargosC());
         jTable1.setVisible(true);
+        
     }
 
     /**
@@ -35,15 +40,11 @@ public class PanelCargoTrabajador extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jtxCedulaT = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        jLabel1.setText("Cedula del Trabajador:");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -67,16 +68,8 @@ public class PanelCargoTrabajador extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtxCedulaT, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -87,11 +80,7 @@ public class PanelCargoTrabajador extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jtxCedulaT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
                 .addContainerGap(35, Short.MAX_VALUE))
@@ -117,25 +106,27 @@ public class PanelCargoTrabajador extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
-        if(!jtxCedulaT.getText().isEmpty()){
-            trabajadorC.añadirCargo(Long.parseLong(jtxCedulaT.getText()), LISTATRABAJADORES,cargoC.getCargo(Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString())));
+
+        if (jTable1.getRowSelectionAllowed() && !jtxCedula.getText().isEmpty()) {
+            trabajadorC.añadirCargo(Long.parseLong(jtxCedula.getText()), LISTATRABAJADORES, cargoC.getCargo(Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString())));
             System.out.println(jTable1.getSelectedRow());
-        }else{
+            cod = Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());
+            System.out.println(cod);
+            JOptionPane.showMessageDialog(this, "Agregado Exitosamente");
+        } else {
             JOptionPane.showMessageDialog(this, "Falta Un Valor Por Llenar");
         }
-            
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jtxCedulaT;
+    public static javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
-    CargoControl cargoC =  new CargoControl();
-    TrabajadorControl trabajadorC =  new TrabajadorControl();
+    CargoControl cargoC = new CargoControl();
+    TrabajadorControl trabajadorC = new TrabajadorControl();
+
 }

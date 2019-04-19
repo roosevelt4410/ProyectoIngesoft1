@@ -8,6 +8,7 @@ package Control;
 import Logica.TrabajadorLogica;
 import Modelo.Cargo;
 import Modelo.Trabajador;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.table.DefaultTableModel;
@@ -18,12 +19,15 @@ import javax.swing.table.DefaultTableModel;
  * apellidos,fecha de nacimiento, direccion, telefono,fondo de salud, fondo de
  * pension , fondo de sesantias y ARL. El sistema debe permitir asignarle un
  * cargo a cada trabajador."
+ * 
+ * 
+ * QUEDO UN MIERDERO LA VISTA NO SE LE OLVIDE CAMBIAR ESE EVENTO 18-04-2019-11:47
  */
 public class TrabajadorControl {
 
     TrabajadorLogica trabajadorL = new TrabajadorLogica();
 
-    public void crearTrabajadorC(long identificacion, String nombre, String apellido, Date fechaN, String direccion, int telefono, long celular, String fPension, String fSesantias, String arl, String estado,Cargo cargo,boolean esCapacitador) {
+    public void crearTrabajadorC(long identificacion, String nombre, String apellido, Date fechaN, String direccion, int telefono, long celular, String fPension, String fSesantias, String arl, String estado,Cargo cargo,boolean esCapacitador) throws SQLException {
         trabajadorL.crearTrabajador(identificacion, nombre, apellido, fechaN, direccion, telefono, celular, fPension, fSesantias, arl, estado,cargo,esCapacitador);
     }
 
@@ -49,6 +53,7 @@ public class TrabajadorControl {
     public boolean ControlconvertirenTrueOfalse(int eleccion){
         return eleccion == 1;
     }
+    
     /*
     public void crearTrabajador(Trabajador trabajador) {
         LISTATRABAJADORES.add(trabajador);

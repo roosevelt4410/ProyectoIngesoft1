@@ -7,6 +7,9 @@ package Vista;
 
 import Control.PanelCargoControl;
 import Control.CargoControl;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -154,7 +157,11 @@ public class PanelCargo extends javax.swing.JPanel {
             if (conPcargo.verificarCargo(jtxNombre.getText(), jtxCodigo.getText(), jtaDescripcion.getText(), jtxSalario.getText())) {
                 JOptionPane.showMessageDialog(this, "Cargo Ya  Existe");
             } else {
-                CargoControl cargoControl = new CargoControl(jtxNombre.getText(), Integer.parseInt(jtxCodigo.getText()), jtaDescripcion.getText(), Double.parseDouble(jtxSalario.getText()));
+                try {
+                    CargoControl cargoControl = new CargoControl(jtxNombre.getText(), Integer.parseInt(jtxCodigo.getText()), jtaDescripcion.getText(), Double.parseDouble(jtxSalario.getText()));
+                } catch (SQLException ex) {
+                    Logger.getLogger(PanelCargo.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 JOptionPane.showMessageDialog(this, "Creado Exitosamente");
                 conPcargo.setText(jtxNombre, jtxCodigo, jtaDescripcion, jtxSalario);
 

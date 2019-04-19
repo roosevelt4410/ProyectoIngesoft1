@@ -5,21 +5,29 @@
  */
 package Vista;
 
-import Logica.TrabajadorLogica;
+
+import Modelo.CargoMapeo;
+import Modelo.TrabajadorMapeo;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JInternalFrame;
 
 /**
  *
  * @author salas
  */
-public class PrincipalTrabajador extends javax.swing.JFrame {
+public class PrincipalGestorNomina extends javax.swing.JFrame {
 
     /**
      * Creates new form Principal
      */
-    public PrincipalTrabajador() {
+    public PrincipalGestorNomina() throws SQLException {
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
+        tm.subirALista();
+        cm.subirALista();
+
         //Trabajador trabajador = new Trabajador();
         //trabajador.leerArchivoC();
     }
@@ -148,6 +156,8 @@ public class PrincipalTrabajador extends javax.swing.JFrame {
         interno.setVisible(true);
         interno.pack();
         interno.setClosable(true);
+        interno.setMaximizable(true);
+        interno.setResizable(true);
         Escritorio.add(interno);
 
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -199,21 +209,26 @@ public class PrincipalTrabajador extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PrincipalTrabajador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PrincipalGestorNomina.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PrincipalTrabajador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PrincipalGestorNomina.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PrincipalTrabajador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PrincipalGestorNomina.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PrincipalTrabajador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PrincipalGestorNomina.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
-                new PrincipalTrabajador().setVisible(true);
+                try {
+                    new PrincipalGestorNomina().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(PrincipalGestorNomina.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -229,4 +244,6 @@ public class PrincipalTrabajador extends javax.swing.JFrame {
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JDesktopPane jtEscritorio;
     // End of variables declaration//GEN-END:variables
+    TrabajadorMapeo tm = new TrabajadorMapeo();
+    CargoMapeo cm = new CargoMapeo();
 }

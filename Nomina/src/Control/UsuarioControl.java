@@ -6,13 +6,13 @@ import java.sql.SQLException;
 import java.util.Vector;
 
 
-public class Control {
+public class UsuarioControl {
     String usuario;
     String contrasena;
     Vector<String> roles;
     String cedulaTrabajador;
 
-    public Control(String usuario, String contrasena,Vector<String> roles , String cedulaTrabajador) {
+    public UsuarioControl(String usuario, String contrasena,Vector<String> roles , String cedulaTrabajador) {
         this.usuario = usuario;
         this.contrasena = contrasena;
         this.cedulaTrabajador=cedulaTrabajador;

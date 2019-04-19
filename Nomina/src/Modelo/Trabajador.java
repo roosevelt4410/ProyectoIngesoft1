@@ -31,10 +31,8 @@ public class Trabajador {
     private String estado;
     private Cargo cargo;
     private boolean esCapacitador;
-    
-    
-//estado falta
 
+//estado falta
     /**
      *
      * @return
@@ -167,6 +165,22 @@ public class Trabajador {
         this.esCapacitador = esCapacitador;
     }
 
+    public Trabajador(long identificacion, String nombre, String apellido, Date fechaN, String direccion, int telefono, long celular, String fPension, String fCesantias, String arl, String estado) {
+        this.identificacion = identificacion;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.fechaN = fechaN;
+        this.direccion = direccion;
+        this.telefono = telefono;
+        this.celular = celular;
+        this.fPension = fPension;
+        this.fCesantias = fCesantias;
+        this.arl = arl;
+        this.estado = estado;
+    }
+
+    
+
     public Trabajador(long identificacion, String nombre, String apellido, Cargo cargo, boolean esCapacitador) {
         this.identificacion = identificacion;
         this.nombre = nombre;
@@ -174,10 +188,6 @@ public class Trabajador {
         this.cargo = cargo;
         this.esCapacitador = esCapacitador;
     }
-    
-    
-
-    
 
     public Trabajador() {
     }
